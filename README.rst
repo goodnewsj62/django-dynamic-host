@@ -79,7 +79,7 @@ Then configure your Django to use the app:
 
 #. Set the ``DYNAMIC_HOST_RESOLVER_FUNC`` setting to the **PATH** of the above function
 
-.. _`repository on Github`: https://github.com/jazzband/django-hosts
+.. _`repository on Github`: https://github.com/goodnewsj62/django-dynamic-host
 
 Configurations
 ------------
