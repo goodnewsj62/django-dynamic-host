@@ -1,0 +1,2 @@
+Contribution to this repo is welcomed. you can fork the repo modify or add new features and submit a pull request. After review you code would be merged everything is okay.
+Please you should also write test for every new feature
