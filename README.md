@@ -68,19 +68,18 @@ Then configure your Django to use the app:
    **beginning** of your ``MIDDLEWARE`` setting.
 
 #. Create a new module containing your resolver function,
-   e.g. in the ``resolver.py`` in any package/directory.
+    e.g. in the ``resolver.py`` in any package/directory.
 
-#. Set the ``ROOT_HOSTCONF`` setting to the dotted Python
-   import path of the module containing your host patterns, e.g.:
+#. Set the ``DYNAMIC_HOST_RESOLVER_FUNC`` setting to the dotted Python
+    import path of the module containing your resolver function
 
-   .. code-block:: python
+    .. code-block:: python
 
-       ROOT_HOSTCONF = 'mysite.hosts'
+        DYNAMIC_HOST_RESOLVER_FUNC = 'path.to.resolver'
 
 #. Set the ``DYNAMIC_HOST_RESOLVER_FUNC`` setting to the **PATH** of the above function
-  
 
-.. _`repository on Github`: https://github.com/jazzband/django-hosts
+.. _`repository on Github`: https://github.com/goodnewsj62/django-dynamic-host
 
 Configurations
 ------------
