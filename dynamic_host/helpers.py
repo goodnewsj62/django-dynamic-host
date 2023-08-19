@@ -28,8 +28,8 @@ def is_a_registered_site(host: str) -> bool:
     """
 
     raw_sites = get_django_domain_sites()
-    domains = (split_domain_port(site.domain) for site in raw_sites)
-    return any(host == domain[0] for domain in domains)
+    domains = [split_domain_port(site.domain) for site in raw_sites]
+    return any(split_domain_port(host)[0] == domain[0] for domain in domains)
 
 
 def is_in_host_list(host: str, host_list: list) -> bool:

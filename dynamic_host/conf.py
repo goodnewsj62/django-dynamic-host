@@ -7,10 +7,6 @@ class Settings:
     @property
     def DYNAMIC_HOST_DEFAULT_HOSTS(self) -> list:
         allowed_hosts = {*getattr(settings, "DYNAMIC_HOST_DEFAULT_HOSTS", [])}
-        if settings.ALLOWED_HOSTS and isinstance(
-            settings.ALLOWED_HOSTS, (list, tuple, set)
-        ):
-            allowed_hosts = {*allowed_hosts, *settings.ALLOWED_HOSTS}
         if settings.DEBUG:
             allowed_hosts = {
                 *allowed_hosts,

@@ -9,42 +9,49 @@ It may become difficult adding them manually to ALLOWED_HOST list or creating di
 What you can do in this case is simple.
  * install the library
 
-.. code-block:: shell
+    .. code-block:: shell
 
-    pip install django-dynamic-host
+        pip install django-dynamic-host
 
- * add library to INSTALLED_APP and add AllowedHostMiddleWare to middleware. You should add the this middleware to the highest
+* add library to INSTALLED_APP and add AllowedHostMiddleWare to middleware. You should add the this middleware to the highest
 
-.. code-block:: python
-    
-    INSTALLED_APPS= [
-        ...
-        "django-dynamic-host",
-    ]
+    .. code-block:: python
+        
+        INSTALLED_APPS= [
+            ...
+            "dynamic_host",
+        ]
 
-    MIDDLEWARE = [
-        "django-dynamic-host.dynamic_host.middleware.AllowedHostMiddleWare",
-        ...
-    ]
- 
- * write a simple resolver function that takes in host, request and extra kwargs just in case
- 
- .. code-block:: python
+        # notice middleware sits at the top... 
+        MIDDLEWARE = [
+            "dynamic_host.middleware.AllowedHostMiddleWare",
+            ...
+        ]
+* disable allowed host by  adding a  ``*`` to ALLOWED_HOST in settings "this is so django-dynamic-host middleware can take responsibility for allowed_host " 
 
-    def some_function(host, request,**kwargs):
-        """
-            add some logic to check domain in database 
-            or some inmemory database system... this is
-            totally up to you
-        ""
-        if cache.exists(host):
-            return True
-        elif Model.objects.filter(domain=host).exists():
-            save_to_cache(host)
-            return True
-        return False 
- * add path the function from settings.py like so
- 
+    .. code-block:: python
+        
+        ALLOWED_HOST=['*']
+
+* write a simple resolver function that takes in host, request and extra kwargs just in case
+
+    .. code-block:: python
+
+        def some_function(host, request,**kwargs):
+            """
+                add some logic to check domain in database 
+                or some inmemory database system... this is
+                totally up to you
+            ""
+            if cache.exists(host):
+                return True
+            elif Model.objects.filter(domain=host).exists():
+                save_to_cache(host)
+                return True
+            return False 
+
+* add path the function from settings.py like so
+
 
 .. code-block:: python
 
@@ -66,6 +73,8 @@ Then configure your Django to use the app:
 
 #. Add ``'dynamic_host.middleware.AllowedHostMiddleWare'`` to the
    **beginning** of your ``MIDDLEWARE`` setting.
+
+#. **DISABLE** ``'ALLOWED_HOST'`` by setting it to ``'['*']'`` in settings.py so the middleware takes responsibility of checking if host is valid.
 
 #. Create a new module containing your resolver function,
     e.g. in the ``resolver.py`` in any package/directory.
@@ -100,3 +109,6 @@ This holds the string path to your resolver function. this function should retur
 NOTE
 ---------------
 When django ``DEBUG=True`` there is no need to manually add localhost or 127.0.0.1 as they are automatically added and allowed under the hood.
+
+
+**AllowedHostMiddleWare SHOULD ALWAYS SIT AT THE TOP AS IT'S JOB IS TO FIRST OF ALL VALIDATE IF AN INCOMING REQUEST FROM A HOST SHOULD BE ALLOWED TO GAIN ACCESS TO RESOURCE**

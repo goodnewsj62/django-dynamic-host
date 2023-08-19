@@ -4,8 +4,7 @@ from django.core.exceptions import DisallowedHost
 from .helpers import (
     import_func,
     is_a_registered_site,
-    is_in_host_list,
-    get_django_domain_sites,
+    is_in_host_list
 )
 from .conf import conf
 
@@ -33,7 +32,6 @@ class AllowedHostMiddleWare:
         if (
             not check_func
             and not conf.DYNAMIC_HOST_ALLOW_SITES
-            and not get_django_domain_sites()
             and not conf.DYNAMIC_HOST_DEFAULT_HOSTS
         ):
             raise DisallowedHost(f"Invalid HTTP_HOST header {host}")

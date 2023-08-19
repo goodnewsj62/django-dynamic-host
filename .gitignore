@@ -1,3 +1,15 @@
 venv/
+env
 .vscode
 __pycache__
+*.pyc
+docs/_build
+.tox
+*.egg-info
+*.egg
+.coverage
+reports/
+build/
+dist/
+.cache/
+.eggs/
