@@ -1,5 +1,5 @@
 django-dynamic-host
-============
+==========================================================
 
 Django dynamic host helps you validate hostname(origin of client) trying to reach your application dynamically. 
 Django dynamic host helps by-pass the ALLOWED_HOST settings which is restricted to a constant manually added value of hostnames
@@ -7,7 +7,8 @@ Django dynamic host helps by-pass the ALLOWED_HOST settings which is restricted 
 For example, let's say you are building a distributed system where a number of dynamically registered (domain stored in database) frontend domain consumes your api.
 It may become difficult adding them manually to ALLOWED_HOST list or creating different settings file for each. well that is where this library comes in handy.
 What you can do in this case is simple.
- * install the library
+
+* install the library
 
     .. code-block:: shell
 
@@ -42,7 +43,7 @@ What you can do in this case is simple.
                 add some logic to check domain in database 
                 or some inmemory database system... this is
                 totally up to you
-            ""
+            """
             if cache.exists(host):
                 return True
             elif Model.objects.filter(domain=host).exists():
@@ -59,7 +60,7 @@ What you can do in this case is simple.
 
 
 Installation
-------------
+----------------------------------------------------------
 
 First, install the app with your favorite package manager, e.g.:
 
@@ -91,7 +92,7 @@ Then configure your Django to use the app:
 .. _`repository on Github`: https://github.com/goodnewsj62/django-dynamic-host
 
 Configurations
-------------
+------------------------------------------------------
 **DYNAMIC_HOST_DEFAULT_HOSTS:**
 To add a number of host manually(like you do with ALLOWED_HOST): Assign the list of default allowed hosts to ``DYNAMIC_HOST_DEFAULT_HOSTS`` in your settings.py.  
 **Note:** This does not stop host not listed in DYNAMIC_HOST_DEFAULT_HOSTS from be validated via the resolver_func. Once django dynamic host  finds the incoming host in this list it just allows it and doesn't go future in calling the resolver_func.
@@ -107,7 +108,7 @@ This holds the string path to your resolver function. this function should retur
 
 
 NOTE
----------------
+------------------------------------------------------------------------
 When django ``DEBUG=True`` there is no need to manually add localhost or 127.0.0.1 as they are automatically added and allowed under the hood.
 
 

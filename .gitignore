@@ -13,3 +13,4 @@ build/
 dist/
 .cache/
 .eggs/
+.pypirc
